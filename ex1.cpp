@@ -55,17 +55,19 @@ void allocDefaultArr(char ***arr) {
 void selectSeat(char ***arr, int *profit, int *seatsTaken) {
   int i;
   int j;
-  cout << "Selecione sua fileira (1-14): ";
+  cout << "Selecione sua fileira (1-" << LIN << "): ";
   cin >> j;
   j--;
-  cout << "Selecione sua poltrona (1-40): ";
+  cout << "Selecione sua poltrona (1-" << COL << "): ";
   cin >> i;
   i--;
-  cout << (*arr)[i][j];
   if ((*arr)[i][j] == '-') {
     (*arr)[i][j] = '#';
     *profit += j < 5 ? 50 : j < 10 ? 30 : 15;
     (*seatsTaken)++;
+    cout << "Lugar escolhido!" << endl;
+  } else {
+    cout << "Desculpe, mas este lugar ja esta ocupado!" << endl;
   }
 }
 
@@ -77,7 +79,7 @@ int main() {
   mallocArr(&arr);
   allocDefaultArr(&arr);
 
-  int selectedOption = 5;
+  int selectedOption = 4;
   while (selectedOption != 0) {
     selectOption(&selectedOption);
     switch (selectedOption) {
@@ -93,8 +95,6 @@ int main() {
         break;
     }
   }
-
   cout << endl << "Obrigado por usar :D" << endl;
-
   return 1;
 }
