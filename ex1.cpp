@@ -69,8 +69,6 @@ void selectSeat(char ***arr, int *profit, int *seatsTaken) {
   } else {
     cout << "Desculpe, mas este lugar ja esta ocupado!" << endl;
   }
-  free(&i);
-  free(&j);
 }
 
 int main() {
