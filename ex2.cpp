@@ -52,14 +52,12 @@ void mallocHands(string ***hands) {
 void populateHands(string ***deck, bool ***selectedDeck, string ***hands) {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 11; j++) {
-      bool selected = false;
-      while (!selected) {
+      while (((*hands)[i][j]).empty()) {
         int selectedI = randomNumber(0, 1);
         int selectedJ = randomNumber(0, 51);
         if ((*selectedDeck)[selectedI][selectedJ] == false) {
           (*hands)[i][j] = (*deck)[selectedI][selectedJ];
           (*selectedDeck)[selectedI][selectedJ] = true;
-          selected = true;
         }
       }
     }
