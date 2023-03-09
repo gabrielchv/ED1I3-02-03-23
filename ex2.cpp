@@ -27,21 +27,6 @@ void populateDeck(string ***deck) {
   }
 }
 
-void mallocDSelecteDeck(bool ***deck) {
-  *deck = new bool *[2];
-  for (int i = 0; i < 2; i++) {
-    (*deck)[i] = new bool[52];
-  }
-}
-
-void populateSelectedDeck(bool ***deck) {
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 52; j++) {
-      (*deck)[i][j] = false;
-    }
-  }
-}
-
 void mallocHands(string ***hands) {
   *hands = new string *[4];
   for (int i = 0; i < 4; i++) {
@@ -49,15 +34,15 @@ void mallocHands(string ***hands) {
   }
 }
 
-void populateHands(string ***deck, bool ***selectedDeck, string ***hands) {
+void populateHands(string ***deck, string ***hands) {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 11; j++) {
       while (((*hands)[i][j]).empty()) {
         int selectedI = randomNumber(0, 1);
         int selectedJ = randomNumber(0, 51);
-        if ((*selectedDeck)[selectedI][selectedJ] == false) {
+        if ((*deck)[selectedI][selectedJ] != "0") {
           (*hands)[i][j] = (*deck)[selectedI][selectedJ];
-          (*selectedDeck)[selectedI][selectedJ] = true;
+          (*deck)[selectedI][selectedJ] = "0";
         }
       }
     }
@@ -81,13 +66,9 @@ int main() {
   mallocDeck(&deck);
   populateDeck(&deck);
 
-  bool **deckSelected;
-  mallocDSelecteDeck(&deckSelected);
-  populateSelectedDeck(&deckSelected);
-
   string **hands;
   mallocHands(&hands);
-  populateHands(&deck, &deckSelected, &hands);
+  populateHands(&deck, &hands);
   showHands(hands);
 
   return 1;
